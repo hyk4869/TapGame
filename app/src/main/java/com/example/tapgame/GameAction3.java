@@ -29,6 +29,10 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
     private Button b9;
 
     private Button startButton;
+    private Button finishButton;
+    private Button isHomeAvailable;
+    private Button isRetryAvailable;
+    private boolean startPhase;
     private int count;
 
     private TextView textTime;
@@ -43,7 +47,9 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_action3);
 
+        startPhase = false;
         count = 1;
+
         b1 = findViewById(R.id.button1);
         b1.findViewById(R.id.button1).setOnClickListener(this);
 
@@ -74,8 +80,15 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
 
-        findViewById(R.id.HomeButton).setOnClickListener(this);
-        findViewById(R.id.RetryButton).setOnClickListener(this);
+        finishButton = findViewById(R.id.finishButton);
+        finishButton.setOnClickListener(this);
+        finishButton.setVisibility(View.INVISIBLE);
+
+        isHomeAvailable = findViewById(R.id.HomeButton);
+        isHomeAvailable.setOnClickListener(this);
+
+        isRetryAvailable = findViewById(R.id.RetryButton);
+        isRetryAvailable.setOnClickListener(this);
 
         textTime = findViewById(R.id.textTimeView);
         textTime.setText(date.format(0));
@@ -133,137 +146,199 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         int getID = view.getId();
 
         if (getID == R.id.button1) {
-            if (b1.getText().toString().equals("" + count)) {
-                b1.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b1.getText().toString().equals("" + count)) {
+                    b1.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.button2) {
-            if (b2.getText().toString().equals("" + count)) {
-                b2.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b2.getText().toString().equals("" + count)) {
+                    b2.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.button3) {
-            if (b3.getText().toString().equals("" + count)) {
-                b3.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b3.getText().toString().equals("" + count)) {
+                    b3.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.button4) {
-            if (b4.getText().toString().equals("" + count)) {
-                b4.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b4.getText().toString().equals("" + count)) {
+                    b4.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.button5) {
-            if (b5.getText().toString().equals("" + count)) {
-                b5.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b5.getText().toString().equals("" + count)) {
+                    b5.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.button6) {
-            if (b6.getText().toString().equals("" + count)) {
-                b6.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b6.getText().toString().equals("" + count)) {
+                    b6.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.button7) {
-            if (b7.getText().toString().equals("" + count)) {
-                b7.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b7.getText().toString().equals("" + count)) {
+                    b7.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.button8) {
-            if (b8.getText().toString().equals("" + count)) {
-                b8.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b8.getText().toString().equals("" + count)) {
+                    b8.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.button9) {
-            if (b9.getText().toString().equals("" + count)) {
-                b9.setVisibility((View.INVISIBLE));
-                count += 1;
-            }
-            if (count == 10) {
-                timephase = true;
-                textTime.setText(date.format(0));
+            if (startPhase) {
+                if (b9.getText().toString().equals("" + count)) {
+                    b9.setVisibility((View.INVISIBLE));
+                    count += 1;
+                }
+                if (count == 10) {
+                    timephase = true;
+                    textTime.setText(date.format(0));
+                    finishButton.setVisibility((View.VISIBLE));
+                    isHomeAvailable.setVisibility(View.INVISIBLE);
+                    isRetryAvailable.setVisibility(View.INVISIBLE);
 
 //                Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
 //                intentScoreScreen.putExtra("score", textTime.getText().toString());
 //                startActivity(intentScoreScreen);
+                }
             }
+
         } else if (getID == R.id.HomeButton) {
             Intent intentHome = new Intent(getApplication(), MainActivity.class);
             startActivity(intentHome);
 
         } else if (getID == R.id.RetryButton) {
-            Intent intentRetry = new Intent(getApplication(), ScoreZone.class);
-            intentRetry.putExtra("score", textTime.getText().toString());
+//            Intent intentRetry = new Intent(getApplication(), ScoreZone.class);
+//            intentRetry.putExtra("score", textTime.getText().toString());
+//            startActivity(intentRetry);
+            Intent intentRetry = new Intent(getApplication(), GameAction3.class);
             startActivity(intentRetry);
 
         } else if (getID == R.id.startButton) {
             startButton.setVisibility((View.INVISIBLE));
+            startPhase = true;
             timephase = false;
             thread = new Thread(this);
             thread.start();
             startTimne = System.currentTimeMillis();
+
+        } else if (getID == R.id.finishButton) {
+            Intent intentRetry = new Intent(getApplication(), ScoreZone.class);
+            intentRetry.putExtra("score", textTime.getText().toString());
+            startActivity(intentRetry);
         }
 
     }

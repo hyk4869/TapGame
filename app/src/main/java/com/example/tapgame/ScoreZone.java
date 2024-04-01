@@ -16,13 +16,13 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
 
         Intent intent = getIntent();
         String score = intent.getStringExtra("score");
-
+        TextView timeTitle = findViewById((R.id.timeTitle));
         TextView newScoreText = findViewById((R.id.newScoreText));
-        TextView scoreText = findViewById((R.id.scoreText));
+        TextView highScoreText = findViewById((R.id.highScoreText));
         TextView timeText = findViewById((R.id.timeText));
 
-        timeText.setText(score);
-        
+        timeTitle.setText(score);
+
         findViewById(R.id.HomeButton).setOnClickListener(this);
         findViewById(R.id.RetryButton).setOnClickListener(this);
 
