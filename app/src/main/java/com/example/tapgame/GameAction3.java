@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
+
+import utils.CreateNumberArray;
 
 public class GameAction3 extends AppCompatActivity implements Runnable, View.OnClickListener {
 
@@ -47,6 +47,8 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_action3);
+
+        CreateNumberArray createNumberArray = new CreateNumberArray();
 
         startPhase = false;
         count = 1;
@@ -94,28 +96,17 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         textTime = findViewById(R.id.textTimeView);
         textTime.setText(date.format(0));
 
-        List<String> number = new ArrayList<String>();
-        number.add("1");
-        number.add("2");
-        number.add("3");
-        number.add("4");
-        number.add("5");
-        number.add("6");
-        number.add("7");
-        number.add("8");
-        number.add("9");
+        ArrayList<String> numbers = createNumberArray.createArray(9);
 
-        Collections.shuffle(number);
-
-        b1.setText(number.get(0));
-        b2.setText(number.get(1));
-        b3.setText(number.get(2));
-        b4.setText(number.get(3));
-        b5.setText(number.get(4));
-        b6.setText(number.get(5));
-        b7.setText(number.get(6));
-        b8.setText(number.get(7));
-        b9.setText(number.get(8));
+        b1.setText(numbers.get(0));
+        b2.setText(numbers.get(1));
+        b3.setText(numbers.get(2));
+        b4.setText(numbers.get(3));
+        b5.setText(numbers.get(4));
+        b6.setText(numbers.get(5));
+        b7.setText(numbers.get(6));
+        b8.setText(numbers.get(7));
+        b9.setText(numbers.get(8));
     }
 
     @Override
@@ -226,10 +217,6 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
             finishButton.setVisibility((View.VISIBLE));
             isHomeAvailable.setVisibility(View.INVISIBLE);
             isRetryAvailable.setVisibility(View.INVISIBLE);
-
-//            Intent intentScoreScreen = new Intent(getApplication(), ScoreZone.class);
-//            intentScoreScreen.putExtra("score", textTime.getText().toString());
-//            startActivity(intentScoreScreen);
         }
     }
 }

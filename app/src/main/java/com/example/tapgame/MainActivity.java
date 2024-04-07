@@ -17,13 +17,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     public SharedPreferences pref;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        pref = PreferenceManager.getDefaultSharedPreferences(this);
         pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String score1 = pref.getString("score1", "00:00:00");
+
+        System.out.println("★★★★★★★★");
+        System.out.println(score1);
 
         title = findViewById(R.id.title);
 
@@ -39,10 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intentLevel);
         } else if (view.getId() == R.id.score) {
             Intent intentScore = new Intent(getApplication(), ScoreZone.class);
-            intentScore.putExtra("score", "00:00:00");
+            intentScore.putExtra("score1", "00:00:00");
             startActivity(intentScore);
         }
 
     }
-
 }

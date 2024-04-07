@@ -11,6 +11,21 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ScoreZone extends AppCompatActivity implements View.OnClickListener {
 
     public SharedPreferences pref;
+    private TextView timeText;
+    private TextView timeTitle;
+    private TextView newScoreText;
+    private TextView highScoreText;
+
+    private SharedPreferences.OnSharedPreferenceChangeListener scoreListener =
+            new SharedPreferences.OnSharedPreferenceChangeListener() {
+                @Override
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                    if (key != null && key.equals("score1")) {
+                        String score1 = sharedPreferences.getString("score1", "00:00:00");
+                        timeText.setText(score1);
+                    }
+                }
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +33,16 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_score_zone);
 
         pref = getSharedPreferences("pref", MODE_PRIVATE);
+        pref.registerOnSharedPreferenceChangeListener(scoreListener);
+
 
         Intent intent = getIntent();
         String score = intent.getStringExtra("score");
 
-        TextView timeTitle = findViewById((R.id.timeTitle));
-        TextView newScoreText = findViewById((R.id.newScoreText));
-        TextView highScoreText = findViewById((R.id.highScoreText));
-        TextView timeText = findViewById((R.id.timeText));
+        timeTitle = findViewById((R.id.timeTitle));
+        newScoreText = findViewById((R.id.newScoreText));
+        highScoreText = findViewById((R.id.highScoreText));
+        timeText = findViewById((R.id.timeText));
 
         findViewById(R.id.HomeButton).setOnClickListener(this);
         findViewById(R.id.RetryButton).setOnClickListener(this);
@@ -36,7 +53,8 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         String score1 = pref.getString("score1", "00:00:00");
         timeText.setText(score1);
 
-        assert score != null;
+
+        if (score == null) return;
         Integer m = Integer.parseInt(score.substring(0, 2));
         Integer s = Integer.parseInt(score.substring(3, 5));
         Integer ms = Integer.parseInt(score.substring(6, 8));
@@ -52,26 +70,33 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         System.out.println(s1);
         System.out.println(ms1);
 
-//        if (m <= m1) {
-//            if (s <= s1) {
-//                if (ms <= ms1) {
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putString("score1", score).apply();
-//                    editor.commit();
-//                } else {
-//                    newScoreText.setText("####");
-//                }
-//            } else {
-//                newScoreText.setText("!!!!");
-//            }
-//        } else {
-//            newScoreText.setText("???");
-//        }
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("score1", score).apply();
-        editor.commit();
+        if (score1.equals("00:00:00")) {
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("score1", score).apply();
+            editor.commit();
+        } else {
+            if (m <= m1) {
+                if (s <= s1) {
+                    if (ms <= ms1) {
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("score1", score).apply();
+                        editor.commit();
+                    } else {
+                        newScoreText.setText("####");
+                    }
+                } else {
+                    newScoreText.setText("!!!!");
+                }
+            } else {
+                return;
+            }
+        }
+    }
 
-        System.out.println(score1);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pref.unregisterOnSharedPreferenceChangeListener(scoreListener);
     }
 
     @Override
