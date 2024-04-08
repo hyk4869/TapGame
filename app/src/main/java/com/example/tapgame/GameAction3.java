@@ -53,47 +53,47 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         startPhase = false;
         count = 1;
 
-        b1 = findViewById(R.id.button1);
+        this.b1 = findViewById(R.id.button1);
         b1.findViewById(R.id.button1).setOnClickListener(this);
 
-        b2 = findViewById(R.id.button2);
+        this.b2 = findViewById(R.id.button2);
         b2.findViewById(R.id.button2).setOnClickListener(this);
 
-        b3 = findViewById(R.id.button3);
+        this.b3 = findViewById(R.id.button3);
         b3.findViewById(R.id.button3).setOnClickListener(this);
 
-        b4 = findViewById(R.id.button4);
+        this.b4 = findViewById(R.id.button4);
         b4.findViewById(R.id.button4).setOnClickListener(this);
 
-        b5 = findViewById(R.id.button5);
+        this.b5 = findViewById(R.id.button5);
         b5.findViewById(R.id.button5).setOnClickListener(this);
 
-        b6 = findViewById(R.id.button6);
+        this.b6 = findViewById(R.id.button6);
         b6.findViewById(R.id.button6).setOnClickListener(this);
 
-        b7 = findViewById(R.id.button7);
+        this.b7 = findViewById(R.id.button7);
         b7.findViewById(R.id.button7).setOnClickListener(this);
 
-        b8 = findViewById(R.id.button8);
+        this.b8 = findViewById(R.id.button8);
         b8.findViewById(R.id.button8).setOnClickListener(this);
 
-        b9 = findViewById(R.id.button9);
+        this.b9 = findViewById(R.id.button9);
         b9.findViewById(R.id.button9).setOnClickListener(this);
 
-        startButton = findViewById(R.id.startButton);
+        this.startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
 
-        finishButton = findViewById(R.id.finishButton);
+        this.finishButton = findViewById(R.id.finishButton);
         finishButton.setOnClickListener(this);
         finishButton.setVisibility(View.INVISIBLE);
 
-        isHomeAvailable = findViewById(R.id.HomeButton);
+        this.isHomeAvailable = findViewById(R.id.HomeButton);
         isHomeAvailable.setOnClickListener(this);
 
-        isRetryAvailable = findViewById(R.id.RetryButton);
+        this.isRetryAvailable = findViewById(R.id.RetryButton);
         isRetryAvailable.setOnClickListener(this);
 
-        textTime = findViewById(R.id.textTimeView);
+        this.textTime = findViewById(R.id.textTimeView);
         textTime.setText(date.format(0));
 
         ArrayList<String> numbers = createNumberArray.createArray(9);
@@ -107,19 +107,20 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         b7.setText(numbers.get(6));
         b8.setText(numbers.get(7));
         b9.setText(numbers.get(8));
+
     }
 
     @Override
     public void run() {
         int period = 10;
 
-        while (!timePhase) {
+        while (!this.timePhase) {
             try {
                 Thread.sleep((period));
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                timePhase = true;
+                this.timePhase = true;
             }
             handler.post(new Runnable() {
                 @Override
@@ -138,47 +139,47 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         int getID = view.getId();
 
         if (getID == R.id.button1) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b1);
             }
 
         } else if (getID == R.id.button2) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b2);
             }
 
         } else if (getID == R.id.button3) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b3);
             }
 
         } else if (getID == R.id.button4) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b4);
             }
 
         } else if (getID == R.id.button5) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b5);
             }
 
         } else if (getID == R.id.button6) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b6);
             }
 
         } else if (getID == R.id.button7) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b7);
             }
 
         } else if (getID == R.id.button8) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b8);
             }
 
         } else if (getID == R.id.button9) {
-            if (startPhase) {
+            if (this.startPhase) {
                 handleButtonClick(b9);
             }
 
@@ -192,11 +193,11 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
 
         } else if (getID == R.id.startButton) {
             startButton.setVisibility((View.INVISIBLE));
-            startPhase = true;
-            timePhase = false;
+            this.startPhase = true;
+            this.timePhase = false;
             thread = new Thread(this);
             thread.start();
-            startTime = System.currentTimeMillis();
+            this.startTime = System.currentTimeMillis();
 
         } else if (getID == R.id.finishButton) {
             Intent intentRetry = new Intent(getApplication(), ScoreZone.class);
@@ -207,12 +208,12 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
     }
 
     private void handleButtonClick(Button clickedButton) {
-        if (clickedButton.getText().toString().equals("" + count)) {
+        if (clickedButton.getText().toString().equals("" + this.count)) {
             clickedButton.setVisibility(View.INVISIBLE);
-            count += 1;
+            this.count += 1;
         }
-        if (count == 10) {
-            timePhase = true;
+        if (this.count == 10) {
+            this.timePhase = true;
             textTime.setText(date.format(0));
             finishButton.setVisibility((View.VISIBLE));
             isHomeAvailable.setVisibility(View.INVISIBLE);
