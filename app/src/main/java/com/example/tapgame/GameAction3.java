@@ -15,33 +15,23 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import utils.CreateNumberArray;
+import variablesDatas.CommonButtons;
+import variablesDatas.VariablesButtonsThree;
 
 public class GameAction3 extends AppCompatActivity implements Runnable, View.OnClickListener {
 
-    private Button b1;
-    private Button b2;
-    private Button b3;
-    private Button b4;
-    private Button b5;
-    private Button b6;
-    private Button b7;
-    private Button b8;
-    private Button b9;
-
-    private Button startButton;
-    private Button finishButton;
-    private Button isHomeAvailable;
-    private Button isRetryAvailable;
+    private VariablesButtonsThree generateButtons;
+    private CommonButtons commonButtons;
+    /**
+     * 始まったかどうかを判定するもの
+     */
     private boolean startPhase;
     private int count;
-
     private TextView textTime;
     private long startTime;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final SimpleDateFormat date = new SimpleDateFormat("mm:ss:SS", Locale.JAPAN);
-
     private volatile boolean timePhase = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,63 +40,66 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
 
         CreateNumberArray createNumberArray = new CreateNumberArray();
 
+        generateButtons = new VariablesButtonsThree(this);
+        commonButtons = new CommonButtons(this);
+
         startPhase = false;
         count = 1;
 
-        this.b1 = findViewById(R.id.button1);
-        b1.findViewById(R.id.button1).setOnClickListener(this);
+        generateButtons.b1 = findViewById(R.id.button1);
+        generateButtons.b1.findViewById(R.id.button1).setOnClickListener(this);
 
-        this.b2 = findViewById(R.id.button2);
-        b2.findViewById(R.id.button2).setOnClickListener(this);
+        generateButtons.b2 = findViewById(R.id.button2);
+        generateButtons.b2.findViewById(R.id.button2).setOnClickListener(this);
 
-        this.b3 = findViewById(R.id.button3);
-        b3.findViewById(R.id.button3).setOnClickListener(this);
+        generateButtons.b3 = findViewById(R.id.button3);
+        generateButtons.b3.findViewById(R.id.button3).setOnClickListener(this);
 
-        this.b4 = findViewById(R.id.button4);
-        b4.findViewById(R.id.button4).setOnClickListener(this);
+        generateButtons.b4 = findViewById(R.id.button4);
+        generateButtons.b4.findViewById(R.id.button4).setOnClickListener(this);
 
-        this.b5 = findViewById(R.id.button5);
-        b5.findViewById(R.id.button5).setOnClickListener(this);
+        generateButtons.b5 = findViewById(R.id.button5);
+        generateButtons.b5.findViewById(R.id.button5).setOnClickListener(this);
 
-        this.b6 = findViewById(R.id.button6);
-        b6.findViewById(R.id.button6).setOnClickListener(this);
+        generateButtons.b6 = findViewById(R.id.button6);
+        generateButtons.b6.findViewById(R.id.button6).setOnClickListener(this);
 
-        this.b7 = findViewById(R.id.button7);
-        b7.findViewById(R.id.button7).setOnClickListener(this);
+        generateButtons.b7 = findViewById(R.id.button7);
+        generateButtons.b7.findViewById(R.id.button7).setOnClickListener(this);
 
-        this.b8 = findViewById(R.id.button8);
-        b8.findViewById(R.id.button8).setOnClickListener(this);
+        generateButtons.b8 = findViewById(R.id.button8);
+        generateButtons.b8.findViewById(R.id.button8).setOnClickListener(this);
 
-        this.b9 = findViewById(R.id.button9);
-        b9.findViewById(R.id.button9).setOnClickListener(this);
+        generateButtons.b9 = findViewById(R.id.button9);
+        generateButtons.b9.findViewById(R.id.button9).setOnClickListener(this);
 
-        this.startButton = findViewById(R.id.startButton);
-        startButton.setOnClickListener(this);
+        commonButtons.startButton = findViewById(R.id.startButton);
+        commonButtons.startButton.setOnClickListener(this);
 
-        this.finishButton = findViewById(R.id.finishButton);
-        finishButton.setOnClickListener(this);
-        finishButton.setVisibility(View.INVISIBLE);
+        commonButtons.finishButton = findViewById(R.id.finishButton);
+        commonButtons.finishButton.setOnClickListener(this);
+        commonButtons.finishButton.setVisibility(View.INVISIBLE);
 
-        this.isHomeAvailable = findViewById(R.id.HomeButton);
-        isHomeAvailable.setOnClickListener(this);
+        commonButtons.isHomeAvailable = findViewById(R.id.HomeButton);
+        commonButtons.isHomeAvailable.setOnClickListener(this);
 
-        this.isRetryAvailable = findViewById(R.id.RetryButton);
-        isRetryAvailable.setOnClickListener(this);
+        commonButtons.isRetryAvailable = findViewById(R.id.RetryButton);
+        commonButtons.isRetryAvailable.setOnClickListener(this);
 
         this.textTime = findViewById(R.id.textTimeView);
         textTime.setText(date.format(0));
 
         ArrayList<String> numbers = createNumberArray.createArray(9);
 
-        b1.setText(numbers.get(0));
-        b2.setText(numbers.get(1));
-        b3.setText(numbers.get(2));
-        b4.setText(numbers.get(3));
-        b5.setText(numbers.get(4));
-        b6.setText(numbers.get(5));
-        b7.setText(numbers.get(6));
-        b8.setText(numbers.get(7));
-        b9.setText(numbers.get(8));
+        generateButtons.b1.setText(numbers.get(0));
+        generateButtons.b2.setText(numbers.get(1));
+        generateButtons.b3.setText(numbers.get(2));
+        generateButtons.b4.setText(numbers.get(3));
+        generateButtons.b5.setText(numbers.get(4));
+        generateButtons.b6.setText(numbers.get(5));
+        generateButtons.b7.setText(numbers.get(6));
+        generateButtons.b8.setText(numbers.get(7));
+        generateButtons.b9.setText(numbers.get(8));
 
     }
 
@@ -140,47 +133,47 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
 
         if (getID == R.id.button1) {
             if (this.startPhase) {
-                handleButtonClick(b1);
+                handleButtonClick(generateButtons.b1);
             }
 
         } else if (getID == R.id.button2) {
             if (this.startPhase) {
-                handleButtonClick(b2);
+                handleButtonClick(generateButtons.b2);
             }
 
         } else if (getID == R.id.button3) {
             if (this.startPhase) {
-                handleButtonClick(b3);
+                handleButtonClick(generateButtons.b3);
             }
 
         } else if (getID == R.id.button4) {
             if (this.startPhase) {
-                handleButtonClick(b4);
+                handleButtonClick(generateButtons.b4);
             }
 
         } else if (getID == R.id.button5) {
             if (this.startPhase) {
-                handleButtonClick(b5);
+                handleButtonClick(generateButtons.b5);
             }
 
         } else if (getID == R.id.button6) {
             if (this.startPhase) {
-                handleButtonClick(b6);
+                handleButtonClick(generateButtons.b6);
             }
 
         } else if (getID == R.id.button7) {
             if (this.startPhase) {
-                handleButtonClick(b7);
+                handleButtonClick(generateButtons.b7);
             }
 
         } else if (getID == R.id.button8) {
             if (this.startPhase) {
-                handleButtonClick(b8);
+                handleButtonClick(generateButtons.b8);
             }
 
         } else if (getID == R.id.button9) {
             if (this.startPhase) {
-                handleButtonClick(b9);
+                handleButtonClick(generateButtons.b9);
             }
 
         } else if (getID == R.id.HomeButton) {
@@ -192,7 +185,7 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
             startActivity(intentRetry);
 
         } else if (getID == R.id.startButton) {
-            startButton.setVisibility((View.INVISIBLE));
+            commonButtons.startButton.setVisibility((View.INVISIBLE));
             this.startPhase = true;
             this.timePhase = false;
             thread = new Thread(this);
@@ -215,9 +208,9 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         if (this.count == 10) {
             this.timePhase = true;
             textTime.setText(date.format(0));
-            finishButton.setVisibility((View.VISIBLE));
-            isHomeAvailable.setVisibility(View.INVISIBLE);
-            isRetryAvailable.setVisibility(View.INVISIBLE);
+            commonButtons.finishButton.setVisibility((View.VISIBLE));
+            commonButtons.isHomeAvailable.setVisibility(View.INVISIBLE);
+            commonButtons.isRetryAvailable.setVisibility(View.INVISIBLE);
         }
     }
 }
