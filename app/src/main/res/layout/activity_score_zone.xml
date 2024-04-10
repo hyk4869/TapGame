@@ -75,6 +75,7 @@
             android:id="@+id/HomeButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:layout_weight="1"
             android:text="@string/HOME_Label"
             android:backgroundTint="#1976D2" />
@@ -83,6 +84,7 @@
             android:id="@+id/RetryButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:layout_weight="1"
             android:text="@string/RETRY_Label"
             android:backgroundTint="#1976D2" />
@@ -92,6 +94,7 @@
         android:id="@+id/ResetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:layout_gravity="center"
         android:text="@string/RESETSCORE_Label"
         android:backgroundTint="#1976D2" />

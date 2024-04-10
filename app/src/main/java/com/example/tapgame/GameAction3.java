@@ -201,7 +201,7 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
     }
 
     private void handleButtonClick(Button clickedButton) {
-        if (clickedButton.getText().toString().equals(getString(R.string.nullString) + this.count)) {
+        if (clickedButton.getText().toString().equals("" + this.count)) {
             clickedButton.setVisibility(View.INVISIBLE);
             this.count += 1;
         }
