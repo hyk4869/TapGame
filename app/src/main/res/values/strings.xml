@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">TapGame</string>
+    <string name="home_name">Java Tap Game</string>
+    <string name="nullString"> </string>
+    <string name="defaultZeroHour">00:00:00</string>
+    <string name="TIME_Label">TIME</string>
+    <string name="START_Label">START</string>
+    <string name="FINISH_Label">FINISH</string>
+    <string name="HOME_Label">HOME</string>
+    <string name="RETRY_Label">RETRY</string>
+    <string name="SCORE_Label">SCORE</string>
+    <string name="NEWSCORE_Label">NEW SCORE</string>
+    <string name="HIGHSCORE_Label">HIGH SCORE</string>
+    <string name="RESETSCORE_Label">RESET SCORE</string>
+
+
+    <string name="one_Label">1</string>
+    <string name="two_Label">2</string>
+    <string name="three_Label">3</string>
+    <string name="four_Label">4</string>
+    <string name="five_Label">5</string>
+    <string name="six_Label">6</string>
+    <string name="seven_Label">7</string>
+    <string name="eight_Label">8</string>
+    <string name="nine_Label">9</string>
+
+    <string name="threeGame_Label">3x3</string>
+    <string name="fourGame_Label">4x4</string>
+    <string name="fiveGame_Label">5x5</string>
+
+
 </resources>

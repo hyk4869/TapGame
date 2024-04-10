@@ -45,7 +45,7 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         this.timeTitle = findViewById((R.id.timeTitle));
         this.newScoreText = findViewById((R.id.newScoreText));
         this.highScoreText = findViewById((R.id.highScoreText));
-        this.timeText = findViewById((R.id.timeText));
+        this.timeText = findViewById((R.id.timeText1));
 
         findViewById(R.id.HomeButton).setOnClickListener(this);
         findViewById(R.id.RetryButton).setOnClickListener(this);
@@ -70,18 +70,16 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         if (this.score1.equals("00:00:00")) {
             this.updateValue();
         } else {
-            if (m <= m1) {
-                if (s <= s1) {
-                    if (ms <= ms1) {
+            if (m < m1) {
+                this.updateValue();
+            } else if (m == m1) {
+                if (s < s1) {
+                    this.updateValue();
+                } else if (s == s1) {
+                    if (ms < ms1) {
                         this.updateValue();
-                    } else {
-                        newScoreText.setText("####");
                     }
-                } else {
-                    newScoreText.setText("!!!!");
                 }
-            } else {
-                return;
             }
         }
 
@@ -105,7 +103,7 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         int getID = view.getId();
-        
+
         if (getID == R.id.HomeButton) {
             Intent intentHome = new Intent(getApplication(), MainActivity.class);
             startActivity(intentHome);
