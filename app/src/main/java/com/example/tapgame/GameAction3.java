@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import utils.CreateNumberArray;
+import utils.CreateArray;
 import variablesDatas.CommonButtons;
 import variablesDatas.VariablesButtonsThree;
 
@@ -38,7 +38,7 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_action3);
 
-        CreateNumberArray createNumberArray = new CreateNumberArray();
+        CreateArray createNumberArray = new CreateArray();
 
         generateButtons = new VariablesButtonsThree(this);
         commonButtons = new CommonButtons(this);
