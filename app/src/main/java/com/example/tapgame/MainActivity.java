@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.start).setOnClickListener(this);
         findViewById(R.id.score).setOnClickListener(this);
-
     }
 
     @Override
@@ -26,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view.getId() == R.id.score) {
             Intent intentScore = new Intent(getApplication(), ScoreZone.class);
             intentScore.putExtra("score1", "00:00:00");
+            intentScore.putExtra("score2", "00:00:00");
+            intentScore.putExtra("score3", "00:00:00");
             startActivity(intentScore);
         }
 
