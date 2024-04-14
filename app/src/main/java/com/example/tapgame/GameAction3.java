@@ -105,6 +105,7 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
 
     @Override
     public void run() {
+        // 時間の更新間隔を設定（10ミリ秒）
         int period = 10;
 
         while (!this.timePhase) {
@@ -115,6 +116,7 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
                 e.printStackTrace();
                 this.timePhase = true;
             }
+            // UI スレッドで時間を更新します。この中で、現在の時間を計算してテキストビューに表示します。
             handler.post(new Runnable() {
                 @Override
                 public void run() {

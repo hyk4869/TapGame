@@ -8,11 +8,12 @@
 
     <Button
         android:id="@+id/threeButton"
-        android:layout_width="150sp"
+        android:layout_width="180sp"
         android:layout_height="60sp"
         android:textSize="25sp"
         android:text="@string/threeGame_Label"
-        android:backgroundTint="#1976D2"
+        android:background="@drawable/custom_btn_blue_15"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,11 +24,12 @@
 
     <Button
         android:id="@+id/fourButton"
-        android:layout_width="150sp"
+        android:layout_width="180sp"
         android:layout_height="60sp"
         android:textSize="25sp"
         android:text="@string/fourGame_Label"
-        android:backgroundTint="#1976D2"
+        android:background="@drawable/custom_btn_blue_15"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -38,11 +40,12 @@
 
     <Button
         android:id="@+id/fiveButton"
-        android:layout_width="150sp"
+        android:layout_width="180sp"
         android:layout_height="60sp"
         android:textSize="25sp"
         android:text="@string/fiveGame_Label"
-        android:backgroundTint="#1976D2"
+        android:background="@drawable/custom_btn_blue_15"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -53,11 +56,12 @@
 
     <Button
         android:id="@+id/scoreButton"
-        android:layout_width="150sp"
+        android:layout_width="180sp"
         android:layout_height="60sp"
         android:textSize="25sp"
         android:text="@string/SCORE_Label"
-        android:backgroundTint="#1976D2"
+        android:background="@drawable/custom_btn_blue_15"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

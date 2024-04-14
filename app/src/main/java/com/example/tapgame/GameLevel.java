@@ -35,6 +35,8 @@ public class GameLevel extends AppCompatActivity implements View.OnClickListener
         } else if (getID == R.id.scoreButton) {
             Intent intentScore = new Intent(getApplication(), ScoreZone.class);
             intentScore.putExtra("score1", "00:00:00");
+            intentScore.putExtra("score2", "00:00:00");
+            intentScore.putExtra("score3", "00:00:00");
             startActivity(intentScore);
         }
 
