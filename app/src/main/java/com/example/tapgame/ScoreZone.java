@@ -8,24 +8,44 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
+import utils.CompareTime;
+import utils.CreateArray;
+
 public class ScoreZone extends AppCompatActivity implements View.OnClickListener {
     /**
      * データ保存用の変数
      */
     public SharedPreferences pref;
-    private TextView timeText;
+    private TextView timeText1;
+    private TextView timeText2;
+    private TextView timeText3;
     private TextView timeTitle;
     private TextView newScoreText;
     private TextView highScoreText;
     private String score;
     private String score1;
+    private String score2;
+    private String score3;
+
+    private ArrayList<String> scoreArray;
+
+    private CompareTime compareTime = new CompareTime();
+    private CreateArray createArray = new CreateArray();
 
     private final SharedPreferences.OnSharedPreferenceChangeListener scoreListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (key != null && key.equals("score1")) {
                 String score1 = sharedPreferences.getString("score1", "00:00:00");
-                timeText.setText(score1);
+                timeText1.setText(score1);
+            } else if (key != null && key.equals("score2")) {
+                String score2 = sharedPreferences.getString("score2", "00:00:00");
+                timeText2.setText(score2);
+            } else if (key != null && key.equals("score3")) {
+                String score3 = sharedPreferences.getString("score3", "00:00:00");
+                timeText3.setText(score3);
             }
         }
     };
@@ -45,7 +65,10 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         this.timeTitle = findViewById((R.id.timeTitle));
         this.newScoreText = findViewById((R.id.newScoreText));
         this.highScoreText = findViewById((R.id.highScoreText));
-        this.timeText = findViewById((R.id.timeText1));
+        this.timeText1 = findViewById((R.id.timeText1));
+        this.timeText2 = findViewById((R.id.timeText2));
+        this.timeText3 = findViewById((R.id.timeText3));
+
 
         findViewById(R.id.HomeButton).setOnClickListener(this);
         findViewById(R.id.RetryButton).setOnClickListener(this);
@@ -54,45 +77,30 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         this.timeTitle.setText(this.score);
 
         this.score1 = pref.getString("score1", "00:00:00");
-        this.timeText.setText(this.score1);
+        this.score2 = pref.getString("score2", "00:00:00");
+        this.score3 = pref.getString("score3", "00:00:00");
 
+        this.timeText1.setText(this.score1);
+        this.timeText2.setText(this.score2);
+        this.timeText3.setText(this.score3);
 
-        if (this.score == null) return;
-        int m = Integer.parseInt(this.score.substring(0, 2));
-        int s = Integer.parseInt(this.score.substring(3, 5));
-        int ms = Integer.parseInt(this.score.substring(6, 8));
+        this.scoreArray = createArray.createStringArray(this.score, this.score1, this.score2, this.score3);
 
-        int m1 = Integer.parseInt(this.score1.substring(0, 2));
-        int s1 = Integer.parseInt(this.score1.substring(3, 5));
-        int ms1 = Integer.parseInt(this.score1.substring(6, 8));
-
-
-        if (this.score1.equals("00:00:00")) {
-            this.updateValue();
-        } else {
-            if (m < m1) {
-                this.updateValue();
-            } else if (m == m1) {
-                if (s < s1) {
-                    this.updateValue();
-                } else if (s == s1) {
-                    if (ms < ms1) {
-                        this.updateValue();
-                    }
-                }
-            }
-        }
-
+        this.updateValue();
     }
 
     /**
      * 値の更新
      */
     private void updateValue() {
+        ArrayList<String> arr = this.compareTime.parseArrayTime(this.scoreArray);
         SharedPreferences.Editor editor = this.pref.edit();
-        editor.putString("score1", this.score).apply();
-        editor.commit();
+        editor.putString("score1", arr.get(0));
+        editor.putString("score2", arr.get(1));
+        editor.putString("score3", arr.get(2));
+        editor.apply();
     }
+
 
     @Override
     protected void onDestroy() {
@@ -114,8 +122,10 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
 
         } else if (getID == R.id.ResetButton) {
             SharedPreferences.Editor editor = pref.edit();
-            editor.remove("score1").apply();
-            editor.commit();
+            editor.remove("score1");
+            editor.remove("score2");
+            editor.remove("score3");
+            editor.apply();
         }
 
     }
