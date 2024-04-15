@@ -10,6 +10,7 @@ import java.util.Locale;
 
 public class CompareTime {
     private final ArrayList<String> defaultArray = new ArrayList<>(Collections.singletonList("00:00:00"));
+//    private boolean isShowNewScoreText;
 
     public ArrayList<String> parseArrayTime(ArrayList<String> arrayValue) {
         SimpleDateFormat formatter = new SimpleDateFormat("mm:ss:SS", Locale.JAPAN);
@@ -23,7 +24,7 @@ public class CompareTime {
                 if (value == null) {
                     value = "00:00:00";
                 }
-                
+
                 Date parseEachDate = formatter.parse(value);
                 if (parseEachDate == null) return defaultArray;
 
@@ -58,6 +59,15 @@ public class CompareTime {
             e.printStackTrace();
             return defaultArray;
         }
+    }
+
+    public boolean isShowNewScoreText(ArrayList<String> arrayValue, String score) {
+        if (arrayValue.size() != 0 && score != null) {
+            return arrayValue.get(0).equals(score);
+        } else {
+            return false;
+        }
+
     }
 
 }

@@ -29,7 +29,16 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
     private String score2;
     private String score3;
 
+    /**
+     * 全てのスコアと新しいスコアを配列にまとめたもの
+     */
     private ArrayList<String> scoreArray;
+    /**
+     * 加工済みの配列
+     */
+    private ArrayList<String> formattedArray;
+
+    private boolean showNewScoreText = false;
 
     private CompareTime compareTime = new CompareTime();
     private CreateArray createArray = new CreateArray();
@@ -38,13 +47,13 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (key != null && key.equals("score1")) {
-                String score1 = sharedPreferences.getString("score1", "00:00:00");
+                score1 = sharedPreferences.getString("score1", "00:00:00");
                 timeText1.setText(score1);
             } else if (key != null && key.equals("score2")) {
-                String score2 = sharedPreferences.getString("score2", "00:00:00");
+                score2 = sharedPreferences.getString("score2", "00:00:00");
                 timeText2.setText(score2);
             } else if (key != null && key.equals("score3")) {
-                String score3 = sharedPreferences.getString("score3", "00:00:00");
+                score3 = sharedPreferences.getString("score3", "00:00:00");
                 timeText3.setText(score3);
             }
         }
@@ -58,7 +67,6 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         this.pref = getSharedPreferences("pref", MODE_PRIVATE);
         pref.registerOnSharedPreferenceChangeListener(this.scoreListener);
 
-
         Intent intent = getIntent();
         this.score = intent.getStringExtra("score");
 
@@ -68,7 +76,6 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         this.timeText1 = findViewById((R.id.timeText1));
         this.timeText2 = findViewById((R.id.timeText2));
         this.timeText3 = findViewById((R.id.timeText3));
-
 
         findViewById(R.id.HomeButton).setOnClickListener(this);
         findViewById(R.id.RetryButton).setOnClickListener(this);
@@ -86,6 +93,16 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
 
         this.scoreArray = createArray.createStringArray(this.score, this.score1, this.score2, this.score3);
 
+        this.formattedArray = this.compareTime.parseArrayTime(this.scoreArray);
+
+        this.showNewScoreText = this.compareTime.isShowNewScoreText(this.formattedArray, this.score);
+
+        if (this.showNewScoreText) {
+            this.newScoreText.setVisibility(View.VISIBLE);
+        } else {
+            this.newScoreText.setVisibility(View.INVISIBLE);
+        }
+
         this.updateValue();
     }
 
@@ -93,11 +110,10 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
      * 値の更新
      */
     private void updateValue() {
-        ArrayList<String> arr = this.compareTime.parseArrayTime(this.scoreArray);
         SharedPreferences.Editor editor = this.pref.edit();
-        editor.putString("score1", arr.get(0));
-        editor.putString("score2", arr.get(1));
-        editor.putString("score3", arr.get(2));
+        editor.putString("score1", this.formattedArray.get(0));
+        editor.putString("score2", this.formattedArray.get(1));
+        editor.putString("score3", this.formattedArray.get(2));
         editor.apply();
     }
 
