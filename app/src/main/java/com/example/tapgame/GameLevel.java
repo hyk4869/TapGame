@@ -29,7 +29,8 @@ public class GameLevel extends AppCompatActivity implements View.OnClickListener
             Intent intentLevel3 = new Intent(getApplication(), GameAction3.class);
             startActivity(intentLevel3);
         } else if (getID == R.id.fourButton) {
-            return;
+            Intent intentLevel4 = new Intent(getApplication(), GameAction4.class);
+            startActivity(intentLevel4);
         } else if (getID == R.id.fiveButton) {
             return;
         } else if (getID == R.id.scoreButton) {

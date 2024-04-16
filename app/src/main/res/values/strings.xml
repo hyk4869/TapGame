@@ -23,6 +23,14 @@
     <string name="seven_Label">7</string>
     <string name="eight_Label">8</string>
     <string name="nine_Label">9</string>
+    <string name="ten_Label">10</string>
+    <string name="eleven_Label">11</string>
+    <string name="twelve_Label">12</string>
+    <string name="thirteen_Label">13</string>
+    <string name="fourteen_Label">14</string>
+    <string name="fifteen_Label">15</string>
+    <string name="sixteen_Label">16</string>
+
 
     <string name="threeGame_Label">3x3</string>
     <string name="fourGame_Label">4x4</string>

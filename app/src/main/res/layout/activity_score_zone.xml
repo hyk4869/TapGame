@@ -8,6 +8,10 @@
     android:orientation="vertical">
 
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30sp" />
+
     <TextView
         android:id="@+id/newScoreText"
         android:layout_width="match_parent"
@@ -27,7 +31,7 @@
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="240dp"
         android:orientation="vertical"
         android:layout_gravity="center">
 
@@ -66,6 +70,10 @@
 
     </LinearLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="80sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -96,6 +104,10 @@
             android:background="@drawable/custom_btn_blue_15"
             app:backgroundTint="@null" />
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40sp" />
 
     <Button
         android:id="@+id/ResetButton"

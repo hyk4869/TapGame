@@ -116,8 +116,7 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
         editor.putString("score3", this.formattedArray.get(2));
         editor.apply();
     }
-
-
+    
     @Override
     protected void onDestroy() {
         super.onDestroy();

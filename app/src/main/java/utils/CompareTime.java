@@ -62,7 +62,7 @@ public class CompareTime {
     }
 
     public boolean isShowNewScoreText(ArrayList<String> arrayValue, String score) {
-        if (arrayValue.size() != 0 && score != null) {
+        if (!arrayValue.isEmpty() && score != null) {
             return arrayValue.get(0).equals(score);
         } else {
             return false;
