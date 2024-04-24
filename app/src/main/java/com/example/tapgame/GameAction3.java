@@ -195,9 +195,9 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
             this.startTime = System.currentTimeMillis();
 
         } else if (getID == R.id.finishButton) {
-            Intent intentRetry = new Intent(getApplication(), ScoreZone.class);
-            intentRetry.putExtra("score", textTime.getText().toString());
-            startActivity(intentRetry);
+            Intent intentFinish = new Intent(getApplication(), ScoreZone.class);
+            intentFinish.putExtra("score", textTime.getText().toString());
+            startActivity(intentFinish);
         }
 
     }
