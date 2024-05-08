@@ -7,11 +7,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 
 import utils.CompareTime;
 import utils.CreateArray;
+import utils.ViewPagerAdapter;
 
 public class ScoreZone extends AppCompatActivity implements View.OnClickListener {
     /**
@@ -43,86 +48,99 @@ public class ScoreZone extends AppCompatActivity implements View.OnClickListener
     private CompareTime compareTime = new CompareTime();
     private CreateArray createArray = new CreateArray();
 
-    private final SharedPreferences.OnSharedPreferenceChangeListener scoreListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key != null && key.equals("score1")) {
-                score1 = sharedPreferences.getString("score1", "00:00:00");
-                timeText1.setText(score1);
-            } else if (key != null && key.equals("score2")) {
-                score2 = sharedPreferences.getString("score2", "00:00:00");
-                timeText2.setText(score2);
-            } else if (key != null && key.equals("score3")) {
-                score3 = sharedPreferences.getString("score3", "00:00:00");
-                timeText3.setText(score3);
-            }
-        }
-    };
+    private ViewPager2 viewPager2;
+    private ViewPagerAdapter viewPagerAdapter;
+
+//    private final SharedPreferences.OnSharedPreferenceChangeListener scoreListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+//        @Override
+//        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+//            if (key != null && key.equals("score1")) {
+//                score1 = sharedPreferences.getString("score1", "00:00:00");
+//                timeText1.setText(score1);
+//            } else if (key != null && key.equals("score2")) {
+//                score2 = sharedPreferences.getString("score2", "00:00:00");
+//                timeText2.setText(score2);
+//            } else if (key != null && key.equals("score3")) {
+//                score3 = sharedPreferences.getString("score3", "00:00:00");
+//                timeText3.setText(score3);
+//            }
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_zone);
 
-        this.pref = getSharedPreferences("pref", MODE_PRIVATE);
-        pref.registerOnSharedPreferenceChangeListener(this.scoreListener);
-
         Intent intent = getIntent();
         this.score = intent.getStringExtra("score");
 
-        this.timeTitle = findViewById((R.id.timeTitle));
-        this.newScoreText = findViewById((R.id.newScoreText));
-        this.highScoreText = findViewById((R.id.highScoreText));
-        this.timeText1 = findViewById((R.id.timeText1));
-        this.timeText2 = findViewById((R.id.timeText2));
-        this.timeText3 = findViewById((R.id.timeText3));
+        viewPager2 = findViewById(R.id.viewPager2);
+        viewPagerAdapter = new ViewPagerAdapter(this, this.score);
+        viewPager2.setAdapter(viewPagerAdapter);
 
-        findViewById(R.id.HomeButton).setOnClickListener(this);
-        findViewById(R.id.RetryButton).setOnClickListener(this);
-        findViewById(R.id.ResetButton).setOnClickListener(this);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
 
-        this.timeTitle.setText(this.score);
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            tab.setText(getResources().getString(viewPagerAdapter.getTitleId(position)));
+        }).attach();
 
-        this.score1 = pref.getString("score1", "00:00:00");
-        this.score2 = pref.getString("score2", "00:00:00");
-        this.score3 = pref.getString("score3", "00:00:00");
+        this.pref = getSharedPreferences("pref", MODE_PRIVATE);
+//        pref.registerOnSharedPreferenceChangeListener(this.scoreListener);
 
-        this.timeText1.setText(this.score1);
-        this.timeText2.setText(this.score2);
-        this.timeText3.setText(this.score3);
 
-        this.scoreArray = createArray.createStringArray(this.score, this.score1, this.score2, this.score3);
-
-        this.formattedArray = this.compareTime.parseArrayTime(this.scoreArray);
-
-        this.showNewScoreText = this.compareTime.isShowNewScoreText(this.formattedArray, this.score);
-
-        if (this.showNewScoreText) {
-            this.newScoreText.setVisibility(View.VISIBLE);
-        } else {
-            this.newScoreText.setVisibility(View.INVISIBLE);
-        }
-
-        this.updateValue();
+//        this.timeTitle = findViewById((R.id.timeTitle));
+//        this.newScoreText = findViewById((R.id.newScoreText));
+//        this.highScoreText = findViewById((R.id.highScoreText));
+//        this.timeText1 = findViewById((R.id.timeText1));
+//        this.timeText2 = findViewById((R.id.timeText2));
+//        this.timeText3 = findViewById((R.id.timeText3));
+//
+//        findViewById(R.id.HomeButton).setOnClickListener(this);
+//        findViewById(R.id.RetryButton).setOnClickListener(this);
+//        findViewById(R.id.ResetButton).setOnClickListener(this);
+//
+//        this.timeTitle.setText(this.score);
+//
+//        this.score1 = pref.getString("score1", "00:00:00");
+//        this.score2 = pref.getString("score2", "00:00:00");
+//        this.score3 = pref.getString("score3", "00:00:00");
+//
+//        this.timeText1.setText(this.score1);
+//        this.timeText2.setText(this.score2);
+//        this.timeText3.setText(this.score3);
+//
+//        this.scoreArray = createArray.createStringArray(this.score, this.score1, this.score2, this.score3);
+//
+//        this.formattedArray = this.compareTime.parseArrayTime(this.scoreArray);
+//
+//        this.showNewScoreText = this.compareTime.isShowNewScoreText(this.formattedArray, this.score);
+//
+//        if (this.showNewScoreText) {
+//            this.newScoreText.setVisibility(View.VISIBLE);
+//        } else {
+//            this.newScoreText.setVisibility(View.INVISIBLE);
+//        }
+//
+//        this.updateValue();
     }
 
     /**
      * 値の更新
      */
-    private void updateValue() {
-        SharedPreferences.Editor editor = this.pref.edit();
-        editor.putString("score1", this.formattedArray.get(0));
-        editor.putString("score2", this.formattedArray.get(1));
-        editor.putString("score3", this.formattedArray.get(2));
-        editor.apply();
-    }
-    
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        pref.unregisterOnSharedPreferenceChangeListener(this.scoreListener);
-    }
+//    private void updateValue() {
+//        SharedPreferences.Editor editor = this.pref.edit();
+//        editor.putString("score1", this.formattedArray.get(0));
+//        editor.putString("score2", this.formattedArray.get(1));
+//        editor.putString("score3", this.formattedArray.get(2));
+//        editor.apply();
+//    }
 
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        pref.unregisterOnSharedPreferenceChangeListener(this.scoreListener);
+//    }
     @Override
     public void onClick(View view) {
         int getID = view.getId();

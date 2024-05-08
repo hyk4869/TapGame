@@ -36,5 +36,7 @@
     <string name="fourGame_Label">4x4</string>
     <string name="fiveGame_Label">5x5</string>
 
+    <string name="tab_title_1">3 x 3</string>
+    <string name="tab_title_2">4 x 4</string>
 
 </resources>
