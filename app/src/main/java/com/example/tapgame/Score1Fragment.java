@@ -21,7 +21,7 @@ import utils.CreateArray;
 public class Score1Fragment extends Fragment implements View.OnClickListener {
 
     public SharedPreferences pref;
-    private String score;
+    private String scoreEasy;
     private String score1;
     private String score2;
     private String score3;
@@ -70,8 +70,8 @@ public class Score1Fragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score1, container, false);
 
-        pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        pref.registerOnSharedPreferenceChangeListener(this.scoreListener);
+        this.pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        this.pref.registerOnSharedPreferenceChangeListener(this.scoreListener);
 
         Bundle bundle = getArguments();
 
@@ -84,14 +84,14 @@ public class Score1Fragment extends Fragment implements View.OnClickListener {
         this.timeText3 = view.findViewById((R.id.timeText3));
         this.newScoreText = view.findViewById(R.id.newScoreText);
 
-        this.score1 = pref.getString("score1", "00:00:00");
-        this.score2 = pref.getString("score2", "00:00:00");
-        this.score3 = pref.getString("score3", "00:00:00");
+        this.score1 = this.pref.getString("score1", "00:00:00");
+        this.score2 = this.pref.getString("score2", "00:00:00");
+        this.score3 = this.pref.getString("score3", "00:00:00");
 
 
         if (bundle != null) {
-            this.score = bundle.getString("score");
-            this.timeTitle.setText(this.score);
+            this.scoreEasy = bundle.getString("score_easy");
+            this.timeTitle.setText(this.scoreEasy);
         }
 
         this.homeButton.setOnClickListener(this);
@@ -102,11 +102,11 @@ public class Score1Fragment extends Fragment implements View.OnClickListener {
         this.timeText2.setText(this.score2);
         this.timeText3.setText(this.score3);
 
-        this.scoreArray = createArray.createStringArray(this.score, this.score1, this.score2, this.score3);
+        this.scoreArray = this.createArray.createStringArray(this.scoreEasy, this.score1, this.score2, this.score3);
 
         this.formattedArray = this.compareTime.parseArrayTime(this.scoreArray);
 
-        this.showNewScoreText = this.compareTime.isShowNewScoreText(this.formattedArray, this.score);
+        this.showNewScoreText = this.compareTime.isShowNewScoreText(this.formattedArray, this.scoreEasy);
 
 
         if (this.showNewScoreText) {
@@ -131,7 +131,7 @@ public class Score1Fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        pref.unregisterOnSharedPreferenceChangeListener(this.scoreListener);
+        this.pref.unregisterOnSharedPreferenceChangeListener(this.scoreListener);
     }
 
     @Override
@@ -147,8 +147,7 @@ public class Score1Fragment extends Fragment implements View.OnClickListener {
             startActivity(intentRetry);
 
         } else if (getID == R.id.ResetButton) {
-//            SharedPreferences.Editor editor = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).edit();
-            SharedPreferences.Editor editor = pref.edit();
+            SharedPreferences.Editor editor = this.pref.edit();
             editor.remove("score1");
             editor.remove("score2");
             editor.remove("score3");

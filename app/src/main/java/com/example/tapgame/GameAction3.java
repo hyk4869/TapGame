@@ -135,47 +135,47 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
 
         if (getID == R.id.button1) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b1);
+                this.handleButtonClick(generateButtons.b1);
             }
 
         } else if (getID == R.id.button2) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b2);
+                this.handleButtonClick(generateButtons.b2);
             }
 
         } else if (getID == R.id.button3) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b3);
+                this.handleButtonClick(generateButtons.b3);
             }
 
         } else if (getID == R.id.button4) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b4);
+                this.handleButtonClick(generateButtons.b4);
             }
 
         } else if (getID == R.id.button5) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b5);
+                this.handleButtonClick(generateButtons.b5);
             }
 
         } else if (getID == R.id.button6) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b6);
+                this.handleButtonClick(generateButtons.b6);
             }
 
         } else if (getID == R.id.button7) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b7);
+                this.handleButtonClick(generateButtons.b7);
             }
 
         } else if (getID == R.id.button8) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b8);
+                this.handleButtonClick(generateButtons.b8);
             }
 
         } else if (getID == R.id.button9) {
             if (this.startPhase) {
-                handleButtonClick(generateButtons.b9);
+                this.handleButtonClick(generateButtons.b9);
             }
 
         } else if (getID == R.id.HomeButton) {
@@ -196,7 +196,7 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
 
         } else if (getID == R.id.finishButton) {
             Intent intentFinish = new Intent(getApplication(), ScoreZone.class);
-            intentFinish.putExtra("score", textTime.getText().toString());
+            intentFinish.putExtra("score_easy", textTime.getText().toString());
             startActivity(intentFinish);
         }
 
