@@ -29,7 +29,18 @@ public class ScoreZone extends AppCompatActivity {
         this.scoreMedium = intent.getStringExtra("score_medium");
 
         this.viewPager2 = findViewById(R.id.viewPager2);
-        this.viewPagerAdapter = new ViewPagerAdapter(this, this.scoreEasy);
+
+
+        if (scoreEasy != null) {
+            this.viewPagerAdapter = new ViewPagerAdapter(this, this.scoreEasy, "score_easy");
+
+        } else if (scoreMedium != null) {
+            this.viewPagerAdapter = new ViewPagerAdapter(this, this.scoreMedium, "score_medium");
+        } else {
+            this.viewPagerAdapter = new ViewPagerAdapter(this, null, "score_easy");
+            this.viewPagerAdapter = new ViewPagerAdapter(this, null, "score_medium");
+        }
+
         this.viewPager2.setAdapter(this.viewPagerAdapter);
 
         this.tabLayout = findViewById(R.id.tabLayout);
@@ -38,5 +49,8 @@ public class ScoreZone extends AppCompatActivity {
             tab.setText(getResources().getString(this.viewPagerAdapter.getTitleId(position)));
         }).attach();
 
+        if (scoreMedium != null) {
+            tabLayout.selectTab(tabLayout.getTabAt(1));
+        }
     }
 }

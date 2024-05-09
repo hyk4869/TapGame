@@ -23,7 +23,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     private Score2Fragment score2Fragment;
     private Bundle bundle;
 
-    public ViewPagerAdapter(FragmentActivity fragmentActivity, String score) {
+    public ViewPagerAdapter(FragmentActivity fragmentActivity, String score, String param) {
         super(fragmentActivity);
         this.titleIds.add(R.string.tab_title_1);
         this.titleIds.add(R.string.tab_title_2);
@@ -33,14 +33,14 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
         this.bundle = new Bundle();
 
-        this.bundle.putString("score_easy", score);
+        this.bundle.putString("score_easy", param.equals("score_easy") ? score : null);
         this.score1Fragment.setArguments(this.bundle);
         this.fragments.add(this.score1Fragment);
 
-
-        this.bundle.putString("score_medium", score);
+        this.bundle.putString("score_medium", param.equals("score_medium") ? score : null);
         this.score2Fragment.setArguments(this.bundle);
         this.fragments.add(this.score2Fragment);
+
     }
 
     @Override

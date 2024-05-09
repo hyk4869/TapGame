@@ -22,9 +22,6 @@
             android:name=".GameLevel"
             android:exported="false" />
         <activity
-            android:name=".HighScore"
-            android:exported="false" />
-        <activity
             android:name=".GameAction3"
             android:exported="false" />
         <activity

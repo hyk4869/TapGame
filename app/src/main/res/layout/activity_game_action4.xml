@@ -36,8 +36,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/one_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -45,8 +47,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/two_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -54,8 +58,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/three_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -63,8 +69,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/four_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
         </TableRow>
 
@@ -82,8 +90,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/five_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -91,8 +101,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/six_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -100,8 +112,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/seven_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -109,8 +123,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/eight_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
         </TableRow>
@@ -129,8 +145,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/nine_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -138,8 +156,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/ten_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -147,8 +167,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/eleven_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -156,8 +178,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/twelve_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
         </TableRow>
@@ -176,8 +200,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/thirteen_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -185,8 +211,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/fourteen_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -194,8 +222,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/fifteen_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
             <Button
@@ -203,8 +233,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:text="@string/sixteen_Label"
+                android:textStyle="bold"
                 android:backgroundTint="#1976D2"
-                android:textSize="17sp"
+                android:textSize="20sp"
+                android:padding="0dp"
                 android:layout_margin="5dp" />
 
         </TableRow>
@@ -221,7 +253,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_gravity="center"
-        android:text="@string/START_Label" />
+        android:text="@string/START_Label"
+        android:background="@drawable/custom_btn_blue_15" />
 
     <Space
         android:layout_width="match_parent"
@@ -233,7 +266,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_gravity="center"
-        android:text="@string/FINISH_Label" />
+        android:text="@string/FINISH_Label"
+        android:background="@drawable/custom_btn_blue_15" />
 
     <Space
         android:layout_width="match_parent"

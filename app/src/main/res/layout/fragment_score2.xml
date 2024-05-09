@@ -21,7 +21,7 @@
             android:id="@+id/newScoreText2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="aaaaaaaaaaaa"
+            android:text="@string/NEWSCORE_Label"
             android:gravity="center"
             android:textSize="35sp"
             android:textColor="#ec5353" />
@@ -55,7 +55,7 @@
                 android:layout_height="60dp"
                 android:text="@string/defaultZeroHour"
                 android:gravity="center"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/timeText5"
@@ -63,7 +63,7 @@
                 android:layout_height="60dp"
                 android:text="@string/defaultZeroHour"
                 android:gravity="center"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/timeText6"
@@ -71,7 +71,7 @@
                 android:layout_height="60dp"
                 android:text="@string/defaultZeroHour"
                 android:gravity="center"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
 
         </LinearLayout>
 
