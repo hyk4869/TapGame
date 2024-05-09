@@ -36,23 +36,8 @@
         app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.45" />
 
-    <Button
-        android:id="@+id/fiveButton"
-        android:layout_width="180sp"
-        android:layout_height="60sp"
-        android:textSize="25sp"
-        android:text="@string/fiveGame_Label"
-        android:background="@drawable/custom_btn_blue_15"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
 
     <Button
         android:id="@+id/scoreButton"
@@ -69,5 +54,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8" />
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>

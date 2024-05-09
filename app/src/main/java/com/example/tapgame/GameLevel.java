@@ -15,7 +15,6 @@ public class GameLevel extends AppCompatActivity implements View.OnClickListener
 
         findViewById(R.id.threeButton).setOnClickListener(this);
         findViewById(R.id.fourButton).setOnClickListener(this);
-        findViewById(R.id.fiveButton).setOnClickListener(this);
         findViewById(R.id.scoreButton).setOnClickListener(this);
 
     }
@@ -31,8 +30,6 @@ public class GameLevel extends AppCompatActivity implements View.OnClickListener
         } else if (getID == R.id.fourButton) {
             Intent intentLevel4 = new Intent(getApplication(), GameAction4.class);
             startActivity(intentLevel4);
-        } else if (getID == R.id.fiveButton) {
-            return;
         } else if (getID == R.id.scoreButton) {
             Intent intentScore = new Intent(getApplication(), ScoreZone.class);
             intentScore.putExtra("score1", "00:00:00");
