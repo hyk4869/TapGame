@@ -3,6 +3,8 @@ package com.example.tapgame;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.button_scale);
+
         if (view.getId() == R.id.start) {
             Intent intentLevel = new Intent(getApplication(), GameLevel.class);
             startActivity(intentLevel);
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intentScore.putExtra("score3", "00:00:00");
             startActivity(intentScore);
         }
+        view.startAnimation(anim);
 
     }
 }

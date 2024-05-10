@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+import dialogs.DeleteDataDialog;
 import utils.CompareTime;
 import utils.CreateArray;
 
@@ -36,6 +39,7 @@ public class Score2Fragment extends Fragment implements View.OnClickListener {
     private TextView newScoreText2;
     private CompareTime compareTime = new CompareTime();
     private CreateArray createArray = new CreateArray();
+    private DeleteDataDialog deleteDataDialog;
 
     /**
      * 全てのスコアと新しいスコアを配列にまとめたもの
@@ -133,22 +137,39 @@ public class Score2Fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         int getID = view.getId();
+        Animation anim = AnimationUtils.loadAnimation(requireContext(), R.anim.button_scale);
 
         if (getID == R.id.HomeButton2) {
             Intent intentHome = new Intent(requireActivity(), MainActivity.class);
             startActivity(intentHome);
 
+            homeButton2.startAnimation(anim);
+
         } else if (getID == R.id.RetryButton2) {
             Intent intentRetry = new Intent(requireActivity(), GameAction4.class);
             startActivity(intentRetry);
 
+            retryButton2.startAnimation(anim);
+
         } else if (getID == R.id.ResetButton2) {
+            this.deleteDataDialog = new DeleteDataDialog(() -> deleteRecords(view));
+            deleteDataDialog.show(getParentFragmentManager(), "delete_dialog_tag");
+
+            resetButton2.startAnimation(anim);
+
+        }
+
+    }
+
+    public void deleteRecords(View view) {
+        int getID = view.getId();
+
+        if (getID == R.id.ResetButton2) {
             SharedPreferences.Editor editor = this.pref.edit();
             editor.remove("score4");
             editor.remove("score5");
             editor.remove("score6");
             editor.apply();
         }
-
     }
 }

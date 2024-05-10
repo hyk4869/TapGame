@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -160,6 +162,7 @@ public class GameAction4 extends AppCompatActivity implements Runnable, View.OnC
     public void onClick(View view) {
         Thread thread;
         int getID = view.getId();
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.button_scale);
 
         if (getID == R.id.button1) {
             if (this.startPhase) {
@@ -245,9 +248,13 @@ public class GameAction4 extends AppCompatActivity implements Runnable, View.OnC
             Intent intentHome = new Intent(getApplication(), MainActivity.class);
             startActivity(intentHome);
 
+            commonButtons.isHomeAvailable.startAnimation(anim);
+
         } else if (getID == R.id.RetryButton) {
             Intent intentRetry = new Intent(getApplication(), GameAction4.class);
             startActivity(intentRetry);
+
+            commonButtons.isRetryAvailable.startAnimation(anim);
 
         } else if (getID == R.id.startButton) {
             commonButtons.startButton.setVisibility((View.INVISIBLE));
@@ -257,10 +264,14 @@ public class GameAction4 extends AppCompatActivity implements Runnable, View.OnC
             thread.start();
             this.startTime = System.currentTimeMillis();
 
+            commonButtons.startButton.startAnimation(anim);
+
         } else if (getID == R.id.finishButton) {
             Intent intentFinish = new Intent(getApplication(), ScoreZone.class);
             intentFinish.putExtra("score_medium", textTime.getText().toString());
             startActivity(intentFinish);
+
+            commonButtons.finishButton.startAnimation(anim);
 
         }
     }

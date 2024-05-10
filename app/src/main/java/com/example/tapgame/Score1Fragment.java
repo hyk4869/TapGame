@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+import dialogs.DeleteDataDialog;
 import utils.CompareTime;
 import utils.CreateArray;
 
@@ -36,6 +39,7 @@ public class Score1Fragment extends Fragment implements View.OnClickListener {
     private TextView newScoreText;
     private CompareTime compareTime = new CompareTime();
     private CreateArray createArray = new CreateArray();
+    private DeleteDataDialog deleteDataDialog;
 
     /**
      * 全てのスコアと新しいスコアを配列にまとめたもの
@@ -72,6 +76,8 @@ public class Score1Fragment extends Fragment implements View.OnClickListener {
 
         this.pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
         this.pref.registerOnSharedPreferenceChangeListener(this.scoreListener);
+
+//        this.deleteDataDialog = new DeleteDataDialog(this::deleteRecords);
 
         Bundle bundle = getArguments();
 
@@ -137,22 +143,39 @@ public class Score1Fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         int getID = view.getId();
+        Animation anim = AnimationUtils.loadAnimation(requireContext(), R.anim.button_scale);
 
         if (getID == R.id.HomeButton) {
             Intent intentHome = new Intent(requireActivity(), MainActivity.class);
             startActivity(intentHome);
 
+            homeButton.startAnimation(anim);
+
         } else if (getID == R.id.RetryButton) {
             Intent intentRetry = new Intent(requireActivity(), GameAction3.class);
             startActivity(intentRetry);
 
+            retryButton.startAnimation(anim);
+
         } else if (getID == R.id.ResetButton) {
+            this.deleteDataDialog = new DeleteDataDialog(() -> deleteRecords(view));
+            deleteDataDialog.show(getParentFragmentManager(), "delete_dialog_tag");
+
+            resetButton.startAnimation(anim);
+
+        }
+
+    }
+
+    public void deleteRecords(View view) {
+        int getID = view.getId();
+
+        if (getID == R.id.ResetButton) {
             SharedPreferences.Editor editor = this.pref.edit();
             editor.remove("score1");
             editor.remove("score2");
             editor.remove("score3");
             editor.apply();
         }
-
     }
 }

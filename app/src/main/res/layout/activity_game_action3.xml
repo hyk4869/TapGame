@@ -163,12 +163,11 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_gravity="center"
-        android:background="@drawable/custom_btn_blue_15"
-        android:text="@string/START_Label" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:textColor="@color/MUIBlue"
+        android:background="@drawable/custom_btn_white_15"
+        android:text="@string/START_Label"
+        app:backgroundTint="@null"
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:id="@+id/finishButton"
@@ -176,8 +175,11 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_gravity="center"
-        android:background="@drawable/custom_btn_blue_15"
-        android:text="@string/FINISH_Label" />
+        android:textColor="@color/MUIBlue"
+        android:background="@drawable/custom_btn_white_15"
+        android:text="@string/FINISH_Label"
+        app:backgroundTint="@null"
+        android:layout_marginTop="5dp" />
 
     <Space
         android:layout_width="match_parent"

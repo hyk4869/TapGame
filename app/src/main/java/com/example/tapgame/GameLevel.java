@@ -3,6 +3,8 @@ package com.example.tapgame;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +23,7 @@ public class GameLevel extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.button_scale);
 
         int getID = view.getId();
 
@@ -37,6 +40,7 @@ public class GameLevel extends AppCompatActivity implements View.OnClickListener
             intentScore.putExtra("score3", "00:00:00");
             startActivity(intentScore);
         }
+        view.startAnimation(anim);
 
     }
 }
