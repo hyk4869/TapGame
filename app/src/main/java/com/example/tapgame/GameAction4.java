@@ -7,33 +7,26 @@ import android.os.Looper;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import utils.CreateArray;
 import variablesDatas.CommonButtons;
+import variablesDatas.CommonGameAction;
 import variablesDatas.VariablesButtonsFour;
 
 public class GameAction4 extends AppCompatActivity implements Runnable, View.OnClickListener {
 
     private VariablesButtonsFour generateButtons;
     private CommonButtons commonButtons;
+    private final CommonGameAction commonGameAction = new CommonGameAction();
+
     /**
-     * 始まったかどうかを判定するもの
+     * UIスレッドにメッセージを送信するためのHandler
      */
-    private boolean startPhase;
-    private int count;
-    private TextView textTime;
-    private long startTime;
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private final SimpleDateFormat date = new SimpleDateFormat("mm:ss:SS", Locale.JAPAN);
-    private volatile boolean timePhase = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +38,8 @@ public class GameAction4 extends AppCompatActivity implements Runnable, View.OnC
         generateButtons = new VariablesButtonsFour(this);
         commonButtons = new CommonButtons(this);
 
-        startPhase = false;
-        count = 1;
+        commonGameAction.startPhase = false;
+        commonGameAction.count = 1;
 
         generateButtons.b1 = findViewById(R.id.button1);
         generateButtons.b1.findViewById(R.id.button1).setOnClickListener(this);
@@ -109,8 +102,8 @@ public class GameAction4 extends AppCompatActivity implements Runnable, View.OnC
         commonButtons.isRetryAvailable = findViewById(R.id.RetryButton);
         commonButtons.isRetryAvailable.setOnClickListener(this);
 
-        this.textTime = findViewById(R.id.textTimeView);
-        textTime.setText(date.format(0));
+        commonGameAction.textTime = findViewById(R.id.textTimeView);
+        commonGameAction.textTime.setText(commonGameAction.date.format(0));
 
         ArrayList<String> numbers = createNumberArray.createArray(16);
 
@@ -138,24 +131,23 @@ public class GameAction4 extends AppCompatActivity implements Runnable, View.OnC
         // 時間の更新間隔を設定（10ミリ秒）
         int period = 10;
 
-        while (!this.timePhase) {
-            try {
-                Thread.sleep((period));
+        // Runnableを定義し、時間の更新処理を行う
+        Runnable updateTimeRunnable = new Runnable() {
+            @Override
+            public void run() {
+                // UIスレッドで時間を更新します。この中で、現在の時間を計算してテキストビューに表示します。
+                long endTime = System.currentTimeMillis();
+                long nowTime = (endTime - commonGameAction.startTime);
+                commonGameAction.textTime.setText(commonGameAction.date.format(nowTime));
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                this.timePhase = true;
-            }
-            // UI スレッドで時間を更新します。この中で、現在の時間を計算してテキストビューに表示します。
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    long endTime = System.currentTimeMillis();
-                    long nowTime = (endTime - startTime);
-                    textTime.setText(date.format(nowTime));
+                // commonGameAction.timePhaseがfalseの場合は、再度このRunnableを実行する
+                if (!commonGameAction.timePhase) {
+                    handler.postDelayed(this, period);
                 }
-            });
-        }
+            }
+        };
+        // 最初の実行
+        handler.postDelayed(updateTimeRunnable, period);
     }
 
     @Override
@@ -165,83 +157,83 @@ public class GameAction4 extends AppCompatActivity implements Runnable, View.OnC
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.button_scale);
 
         if (getID == R.id.button1) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b1);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b1, commonButtons, 17);
             }
 
         } else if (getID == R.id.button2) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b2);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b2, commonButtons, 17);
             }
 
         } else if (getID == R.id.button3) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b3);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b3, commonButtons, 17);
             }
 
         } else if (getID == R.id.button4) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b4);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b4, commonButtons, 17);
             }
 
         } else if (getID == R.id.button5) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b5);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b5, commonButtons, 17);
             }
 
         } else if (getID == R.id.button6) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b6);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b6, commonButtons, 17);
             }
 
         } else if (getID == R.id.button7) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b7);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b7, commonButtons, 17);
             }
 
         } else if (getID == R.id.button8) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b8);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b8, commonButtons, 17);
             }
 
         } else if (getID == R.id.button9) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b9);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b9, commonButtons, 17);
             }
 
         } else if (getID == R.id.button10) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b10);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b10, commonButtons, 17);
             }
 
         } else if (getID == R.id.button11) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b11);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b11, commonButtons, 17);
             }
 
         } else if (getID == R.id.button12) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b12);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b12, commonButtons, 17);
             }
 
         } else if (getID == R.id.button13) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b13);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b13, commonButtons, 17);
             }
 
         } else if (getID == R.id.button14) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b14);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b14, commonButtons, 17);
             }
 
         } else if (getID == R.id.button15) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b15);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b15, commonButtons, 17);
             }
 
         } else if (getID == R.id.button16) {
-            if (this.startPhase) {
-                this.handleButtonClick(generateButtons.b16);
+            if (commonGameAction.startPhase) {
+                commonGameAction.handleButtonClick(generateButtons.b16, commonButtons, 17);
             }
 
         } else if (getID == R.id.HomeButton) {
@@ -258,35 +250,21 @@ public class GameAction4 extends AppCompatActivity implements Runnable, View.OnC
 
         } else if (getID == R.id.startButton) {
             commonButtons.startButton.setVisibility((View.INVISIBLE));
-            this.startPhase = true;
-            this.timePhase = false;
+            commonGameAction.startPhase = true;
+            commonGameAction.timePhase = false;
             thread = new Thread(this);
             thread.start();
-            this.startTime = System.currentTimeMillis();
+            commonGameAction.startTime = System.currentTimeMillis();
 
             commonButtons.startButton.startAnimation(anim);
 
         } else if (getID == R.id.finishButton) {
             Intent intentFinish = new Intent(getApplication(), ScoreZone.class);
-            intentFinish.putExtra("score_medium", textTime.getText().toString());
+            intentFinish.putExtra("score_medium", commonGameAction.textTime.getText().toString());
             startActivity(intentFinish);
 
             commonButtons.finishButton.startAnimation(anim);
 
-        }
-    }
-
-    private void handleButtonClick(Button clickedButton) {
-        if (clickedButton.getText().toString().equals("" + this.count)) {
-            clickedButton.setVisibility(View.INVISIBLE);
-            this.count += 1;
-        }
-        if (this.count == 17) {
-            this.timePhase = true;
-            textTime.setText(date.format(0));
-            commonButtons.finishButton.setVisibility((View.VISIBLE));
-            commonButtons.isHomeAvailable.setVisibility(View.INVISIBLE);
-            commonButtons.isRetryAvailable.setVisibility(View.INVISIBLE);
         }
     }
 }
