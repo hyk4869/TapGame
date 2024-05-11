@@ -9,60 +9,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-
-import java.util.ArrayList;
 
 import dialogs.DeleteDataDialog;
 import utils.CompareTime;
 import utils.CreateArray;
+import variablesDatas.CommonScoreFragments;
 
 
 public class Score2Fragment extends Fragment implements View.OnClickListener {
 
-    public SharedPreferences pref;
-    private String scoreMedium;
-    private String score4;
-    private String score5;
-    private String score6;
-    private TextView timeTitle2;
-    private TextView timeText4;
-    private TextView timeText5;
-    private TextView timeText6;
-    private Button homeButton2;
-    private Button retryButton2;
-    private Button resetButton2;
-    private boolean showNewScoreText = false;
-    private TextView newScoreText2;
-    private CompareTime compareTime = new CompareTime();
-    private CreateArray createArray = new CreateArray();
+    private final CompareTime compareTime = new CompareTime();
+    private final CreateArray createArray = new CreateArray();
     private DeleteDataDialog deleteDataDialog;
 
-    /**
-     * 全てのスコアと新しいスコアを配列にまとめたもの
-     */
-    private ArrayList<String> scoreArray;
-    /**
-     * 加工済みの配列
-     */
-    private ArrayList<String> formattedArray;
+    private final CommonScoreFragments commonScoreFragments = new CommonScoreFragments();
 
-    private final SharedPreferences.OnSharedPreferenceChangeListener scoreListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key != null && key.equals("score4")) {
-                score4 = sharedPreferences.getString("score4", "00:00:00");
-                timeText4.setText(score4);
-            } else if (key != null && key.equals("score5")) {
-                score5 = sharedPreferences.getString("score5", "00:00:00");
-                timeText5.setText(score5);
-            } else if (key != null && key.equals("score6")) {
-                score6 = sharedPreferences.getString("score6", "00:00:00");
-                timeText6.setText(score6);
-            }
+
+    private final SharedPreferences.OnSharedPreferenceChangeListener scoreListener = (sharedPreferences, key) -> {
+        if (key != null && key.equals("score4")) {
+            commonScoreFragments.score1 = sharedPreferences.getString("score4", "00:00:00");
+            commonScoreFragments.timeText1.setText(commonScoreFragments.score1);
+        } else if (key != null && key.equals("score5")) {
+            commonScoreFragments.score2 = sharedPreferences.getString("score5", "00:00:00");
+            commonScoreFragments.timeText2.setText(commonScoreFragments.score2);
+        } else if (key != null && key.equals("score6")) {
+            commonScoreFragments.score3 = sharedPreferences.getString("score6", "00:00:00");
+            commonScoreFragments.timeText3.setText(commonScoreFragments.score3);
         }
     };
 
@@ -71,67 +45,62 @@ public class Score2Fragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score2, container, false);
 
-        this.pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        this.pref.registerOnSharedPreferenceChangeListener(this.scoreListener);
+        commonScoreFragments.pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        commonScoreFragments.pref.registerOnSharedPreferenceChangeListener(this.scoreListener);
 
         Bundle bundle = getArguments();
 
-        this.timeTitle2 = view.findViewById(R.id.timeTitle2);
-        this.homeButton2 = view.findViewById(R.id.HomeButton2);
-        this.retryButton2 = view.findViewById(R.id.RetryButton2);
-        this.resetButton2 = view.findViewById(R.id.ResetButton2);
-        this.timeText4 = view.findViewById((R.id.timeText4));
-        this.timeText5 = view.findViewById((R.id.timeText5));
-        this.timeText6 = view.findViewById((R.id.timeText6));
-        this.newScoreText2 = view.findViewById(R.id.newScoreText2);
+        commonScoreFragments.timeTitle = view.findViewById(R.id.timeTitle2);
+        commonScoreFragments.homeButton = view.findViewById(R.id.HomeButton2);
+        commonScoreFragments.retryButton = view.findViewById(R.id.RetryButton2);
+        commonScoreFragments.resetButton = view.findViewById(R.id.ResetButton2);
+        commonScoreFragments.timeText1 = view.findViewById((R.id.timeText4));
+        commonScoreFragments.timeText2 = view.findViewById((R.id.timeText5));
+        commonScoreFragments.timeText3 = view.findViewById((R.id.timeText6));
+        commonScoreFragments.newScoreText = view.findViewById(R.id.newScoreText2);
 
-        this.score4 = this.pref.getString("score4", "00:00:00");
-        this.score5 = this.pref.getString("score5", "00:00:00");
-        this.score6 = this.pref.getString("score6", "00:00:00");
+        commonScoreFragments.score1 = commonScoreFragments.pref.getString("score4", "00:00:00");
+        commonScoreFragments.score2 = commonScoreFragments.pref.getString("score5", "00:00:00");
+        commonScoreFragments.score3 = commonScoreFragments.pref.getString("score6", "00:00:00");
 
         if (bundle != null) {
-            this.scoreMedium = bundle.getString("score_medium");
-            this.timeTitle2.setText(this.scoreMedium);
+            commonScoreFragments.timeScore = bundle.getString("score_medium");
+            commonScoreFragments.timeTitle.setText(commonScoreFragments.timeScore);
         }
 
-        this.homeButton2.setOnClickListener(this);
-        this.retryButton2.setOnClickListener(this);
-        this.resetButton2.setOnClickListener(this);
+        commonScoreFragments.homeButton.setOnClickListener(this);
+        commonScoreFragments.retryButton.setOnClickListener(this);
+        commonScoreFragments.resetButton.setOnClickListener(this);
 
-        this.timeText4.setText(this.score4);
-        this.timeText5.setText(this.score5);
-        this.timeText6.setText(this.score6);
+        commonScoreFragments.timeText1.setText(commonScoreFragments.score1);
+        commonScoreFragments.timeText2.setText(commonScoreFragments.score2);
+        commonScoreFragments.timeText3.setText(commonScoreFragments.score3);
 
-        this.scoreArray = this.createArray.createStringArray(this.scoreMedium, this.score4, this.score5, this.score6);
+        commonScoreFragments.scoreArray = this.createArray.createStringArray(commonScoreFragments.timeScore,
+                commonScoreFragments.score1, commonScoreFragments.score2, commonScoreFragments.score3);
 
-        this.formattedArray = this.compareTime.parseArrayTime(this.scoreArray);
+        commonScoreFragments.formattedArray = this.compareTime.parseArrayTime(commonScoreFragments.scoreArray);
 
-        this.showNewScoreText = this.compareTime.isShowNewScoreText(this.formattedArray, this.scoreMedium);
+        commonScoreFragments.showNewScoreText =
+                this.compareTime.isShowNewScoreText(commonScoreFragments.formattedArray,
+                        commonScoreFragments.timeScore);
 
-        if (this.showNewScoreText) {
-            this.newScoreText2.setVisibility(View.VISIBLE);
+        if (commonScoreFragments.showNewScoreText) {
+            commonScoreFragments.newScoreText.setVisibility(View.VISIBLE);
         } else {
-            this.newScoreText2.setVisibility(View.INVISIBLE);
+            commonScoreFragments.newScoreText.setVisibility(View.INVISIBLE);
         }
 
-        this.updateValue();
+        commonScoreFragments.updateValue("score4", "score5", "score6");
 
         return view;
 
     }
 
-    private void updateValue() {
-        SharedPreferences.Editor editor = this.pref.edit();
-        editor.putString("score4", this.formattedArray.get(0));
-        editor.putString("score5", this.formattedArray.get(1));
-        editor.putString("score6", this.formattedArray.get(2));
-        editor.apply();
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.pref.unregisterOnSharedPreferenceChangeListener(this.scoreListener);
+        commonScoreFragments.pref.unregisterOnSharedPreferenceChangeListener(this.scoreListener);
     }
 
     @Override
@@ -143,33 +112,22 @@ public class Score2Fragment extends Fragment implements View.OnClickListener {
             Intent intentHome = new Intent(requireActivity(), MainActivity.class);
             startActivity(intentHome);
 
-            homeButton2.startAnimation(anim);
+            commonScoreFragments.homeButton.startAnimation(anim);
 
         } else if (getID == R.id.RetryButton2) {
             Intent intentRetry = new Intent(requireActivity(), GameAction4.class);
             startActivity(intentRetry);
 
-            retryButton2.startAnimation(anim);
+            commonScoreFragments.retryButton.startAnimation(anim);
 
         } else if (getID == R.id.ResetButton2) {
-            this.deleteDataDialog = new DeleteDataDialog(() -> deleteRecords(view));
+            this.deleteDataDialog = new DeleteDataDialog(() -> commonScoreFragments.deleteRecords(getID,
+                    R.id.ResetButton2, "score4", "score5", "score6"));
             deleteDataDialog.show(getParentFragmentManager(), "delete_dialog_tag");
 
-            resetButton2.startAnimation(anim);
+            commonScoreFragments.resetButton.startAnimation(anim);
 
         }
 
-    }
-
-    public void deleteRecords(View view) {
-        int getID = view.getId();
-
-        if (getID == R.id.ResetButton2) {
-            SharedPreferences.Editor editor = this.pref.edit();
-            editor.remove("score4");
-            editor.remove("score5");
-            editor.remove("score6");
-            editor.apply();
-        }
     }
 }
