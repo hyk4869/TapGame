@@ -24,7 +24,8 @@
     <TableLayout
         android:layout_width="300dp"
         android:layout_height="320dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:id="@+id/allButton">
 
         <TableRow
             android:layout_width="match_parent"

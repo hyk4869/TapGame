@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TableLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +27,7 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
      * UIスレッドにメッセージを送信するためのHandler
      */
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private TableLayout allButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,9 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
 
         commonGameAction.textTime = findViewById(R.id.textTimeView);
         commonGameAction.textTime.setText(commonGameAction.date.format(0));
+
+        allButton = findViewById(R.id.allButton);
+        allButton.setVisibility(View.INVISIBLE);
 
         ArrayList<String> numbers = createNumberArray.createArray(9);
 
@@ -187,6 +192,7 @@ public class GameAction3 extends AppCompatActivity implements Runnable, View.OnC
             commonGameAction.timePhase = false;
             thread = new Thread(this);
             thread.start();
+            allButton.setVisibility(View.VISIBLE);
             commonGameAction.startTime = System.currentTimeMillis();
             commonButtons.startButton.startAnimation(anim);
 
